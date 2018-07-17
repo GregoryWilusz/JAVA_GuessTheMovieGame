@@ -7,28 +7,38 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException {
         ArrayList<Character> wrongLetters = new ArrayList<>();
         String guessingLetter;
+        boolean hasWon = false;
 
         Movies movies = new Movies();
         ArrayList<String> movieList = movies.getMovieList();
         String pickedMovie = movies.pickRandomMovie(movieList);
         String encodedMovie = movies.encodeMovie(pickedMovie);
-        System.out.println(encodedMovie + " with the length of: " + encodedMovie.length());
+        System.out.println(encodedMovie);
 
-        for (int i = 10; i > 0; i--) {
-            System.out.println("You are guessing: " + encodedMovie);
-            System.out.println("You guessed (" + wrongLetters.size() + ") wrong letters: " + wrongLetters.toString());
-            System.out.println("Guess a letter: ");
-
-            Scanner scanner = new Scanner(System.in);
-            guessingLetter = scanner.nextLine();
-
-            if(pickedMovie.contains(guessingLetter)) {
-                encodedMovie = movies.decodeMovie(pickedMovie, encodedMovie, guessingLetter);
+        for (int attemptsLeft = 10; attemptsLeft > 0; attemptsLeft--) {
+            if(encodedMovie.indexOf('_') == -1) {
+                hasWon = true;
             } else {
-                wrongLetters.add(guessingLetter.charAt(0));
+                System.out.println("You are guessing: " + encodedMovie);
+                System.out.println("You guessed (" + wrongLetters.size() + ") wrong letters: " + wrongLetters.toString());
+                System.out.println("You have: " + attemptsLeft + " attempts left.");
+                System.out.println("Guess a letter: ");
+
+                Scanner scanner = new Scanner(System.in);
+                guessingLetter = scanner.nextLine();
+
+                if(pickedMovie.contains(guessingLetter)) {
+                    attemptsLeft++;
+                    encodedMovie = movies.decodeMovie(pickedMovie, encodedMovie, guessingLetter);
+                } else {
+                    wrongLetters.add(guessingLetter.charAt(0));
+                }
             }
-
         }
-
+        if (hasWon) {
+            System.out.println("You won! The correct answer is: " + encodedMovie);
+        } else {
+            System.out.println("Game over. The correct answer is: " + pickedMovie);
+        }
     }
 }
