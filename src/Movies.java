@@ -38,4 +38,14 @@ public class Movies {
         }
         return encodedMovie.toString();
     }
+
+    public String decodeMovie(String pickedMovie, String encodedMovie, String guessingLetter) {
+        StringBuilder decodedMovie = new StringBuilder(encodedMovie);
+        for(int i = 0; i < encodedMovie.length(); i++) {
+            if(pickedMovie.charAt(i) == guessingLetter.charAt(0)) {
+                decodedMovie.setCharAt(i, guessingLetter.charAt(0));
+            }
+        }
+        return decodedMovie.toString();
+    }
 }
