@@ -6,11 +6,11 @@ import java.util.Scanner;
 public class Movies {
     private ArrayList<String> movieList;
 
-    Movies() {
+    public Movies() {
         this.movieList = new ArrayList<>();
     }
 
-    ArrayList<String> getMovieList() throws FileNotFoundException {
+    public ArrayList<String> getMovieList() throws FileNotFoundException {
         File fileWithMovies = new File("movies.txt");
         Scanner scanner = new Scanner(fileWithMovies);
 
@@ -18,5 +18,10 @@ public class Movies {
             this.movieList.add(scanner.nextLine());
         }
         return this.movieList;
+    }
+
+    public String pickRandomMovie(ArrayList<String> movieList) {
+        int randomIndex = (int) ((Math.random() * movieList.size()) + 1);
+        return movieList.get(randomIndex);
     }
 }
