@@ -7,6 +7,7 @@ public class Main {
         Movies movies = new Movies();
         ArrayList<String> movieList = movies.getMovieList();
         String pickedMovie = movies.pickRandomMovie(movieList);
-        System.out.println(pickedMovie);
+        String encodedMovie = movies.encodeMovie(pickedMovie);
+        System.out.println(encodedMovie);
     }
 }

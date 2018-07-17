@@ -24,4 +24,18 @@ public class Movies {
         int randomIndex = (int) ((Math.random() * movieList.size()) + 1);
         return movieList.get(randomIndex);
     }
+
+    public String encodeMovie(String pickedMovie) {
+        System.out.println(pickedMovie);
+        StringBuilder encodedMovie = new StringBuilder();
+        for(int i = 0; i < pickedMovie.length(); i++) {
+            if(pickedMovie.charAt(i) != ' ') {
+                encodedMovie.append("_");
+
+            } else {
+                encodedMovie.append(" ");
+            }
+        }
+        return encodedMovie.toString();
+    }
 }
